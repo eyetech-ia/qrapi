@@ -132,7 +132,7 @@ class ApartmentController {
         message : "Erro! não encontrado!"
       });
     }
-    await Apartments.delete();
+    await apartment.delete();
     return response.status(200).json({
       message : "Removido com sucesso!"
     });

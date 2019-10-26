@@ -71,7 +71,7 @@ class CameraController {
   async show ({ params, request, response, view }) {
     const camera = await Cameras.find(params.id);
     if(camera){
-      return response.json(apartment);
+      return response.json(camera);
     } else {
       return response.status(401).json({
         error : true,
@@ -128,7 +128,7 @@ class CameraController {
         message : "Erro! não encontrada!"
       });
     }
-    await Cameras.delete();
+    await camera.delete();
     return response.status(200).json({
       message : "Removido com sucesso!"
     });
