@@ -22,4 +22,5 @@ Route.on('/').render('welcome');
 Route.group(()=>{
   Route.resource('task', 'TaskController');
   Route.resource('apartamentos', 'Ambient//ApartmentController');
+  Route.resource('controle-de-acesso', 'Ambient//AccessControlController');
 }).prefix('api');

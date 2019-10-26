@@ -19,7 +19,7 @@ class AccessControlController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    const registros = await DB.table('accesscontrol').where('client_id', '123456');
+    const registros = await DB.table('registros').where('client_id', '123456');
     if(!registros){
       return response.status(401).json({
         error : true,
