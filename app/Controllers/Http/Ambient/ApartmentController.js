@@ -92,7 +92,6 @@ class ApartmentController {
     }
   }
 
-
   /**
    * Update apartment details.
    * PUT or PATCH apartments/:id
@@ -102,6 +101,35 @@ class ApartmentController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const data = request.only([
+      'numero',
+      'bloco',
+      'telefone',
+      'veiculos',
+      'moradores',
+      'client_id',
+      'condominium_id'
+    ]);
+
+    const apartment = await Apartments.find(params.id);
+      if(!apartment) {
+        return response.status(401).json({
+          message : 'Apartamento não encontrado!'
+        });
+      }
+    //Params
+    apartment.numero = data.numero;
+    apartment.bloco = data.bloco;
+    apartment.telefone = data.telefone;
+    apartment.moradores = data.moradores;
+    apartment.veiculos = data.veiculos;
+    apartment.client_id = data.client_id;
+    apartment.condominium_id = data.condominium_id;
+
+    await apartment.save();
+    return response.status(200).json({
+      message : "Alterado com sucesso!"
+    });
   }
 
   /**
@@ -113,6 +141,16 @@ class ApartmentController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    const apartment = await Apartments.find(params.id);
+    if(!apartment) {
+      return response.status(401).json({
+        message : "Erro! não encontrado!"
+      });
+    }
+    await Apartments.delete();
+    return response.status(200).json({
+      message : "Removido com sucesso!"
+    });
   }
 }
 
