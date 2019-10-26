@@ -1,5 +1,6 @@
 'use strict';
 const Apartments = use('App/Models/Ambient/Apartment');
+const DB = use('Database');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -17,9 +18,9 @@ class ApartmentController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ response }) {
+  async index ({ response, auth }) {
     //Substituir por auth.client_id
-    let apartments = await Apartments.findBy('client_id', '123456');
+    let apartments = await DB.table('apartments').where('client_id', '123456');
     if(!apartments){
       return response.status(401).json({
         error : true,
@@ -28,8 +29,6 @@ class ApartmentController {
     }
     return response.status(201).json(apartments);
   }
-
-
   /**
    * Create/save a new apartment.
    * POST apartments
@@ -48,10 +47,7 @@ class ApartmentController {
       'client_id',
       'condominium_id'
     ]);
-
-
     const apartment = new Apartments();
-      //Params
       apartment.numero = data.numero;
       apartment.bloco = data.bloco;
       apartment.telefone = data.telefone;
@@ -59,13 +55,9 @@ class ApartmentController {
       apartment.veiculos = data.veiculos;
       apartment.client_id = data.client_id;
       apartment.condominium_id = data.condominium_id;
-
-
-
     await apartment.save();
     return response.status(201).json({success : true, message: 'Cadastrado com Sucesso!'});
   }
-
   /**
    * Display a single apartment.
    * GET apartments/:id
@@ -75,11 +67,6 @@ class ApartmentController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-
-  // async show({params, response}){
-  //   const task = await Task.find(params.id);
-  //   return response.json(task);
-  // }
   async show ({ params, response }) {
     const apartment = await Apartments.find(params.id);
     if(apartment){
@@ -117,15 +104,13 @@ class ApartmentController {
           message : 'Apartamento não encontrado!'
         });
       }
-    //Params
-    apartment.numero = data.numero;
-    apartment.bloco = data.bloco;
-    apartment.telefone = data.telefone;
-    apartment.moradores = data.moradores;
-    apartment.veiculos = data.veiculos;
-    apartment.client_id = data.client_id;
-    apartment.condominium_id = data.condominium_id;
-
+      apartment.numero = data.numero;
+      apartment.bloco = data.bloco;
+      apartment.telefone = data.telefone;
+      apartment.moradores = data.moradores;
+      apartment.veiculos = data.veiculos;
+      apartment.client_id = data.client_id;
+      apartment.condominium_id = data.condominium_id;
     await apartment.save();
     return response.status(200).json({
       message : "Alterado com sucesso!"
