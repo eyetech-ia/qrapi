@@ -49,14 +49,18 @@ class ApartmentController {
       'condominium_id'
     ]);
 
+
     const apartment = new Apartments();
       //Params
       apartment.numero = data.numero;
       apartment.bloco = data.bloco;
       apartment.telefone = data.telefone;
+      apartment.moradores = data.moradores;
       apartment.veiculos = data.veiculos;
       apartment.client_id = data.client_id;
-      apartment.condominimum_id = data.condominimum_id;
+      apartment.condominium_id = data.condominium_id;
+
+
 
     await apartment.save();
     return response.status(201).json({success : true, message: 'Cadastrado com Sucesso!'});
@@ -71,29 +75,23 @@ class ApartmentController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response }) {
-    try {
-      let apartment = await Apartments.findBy('id', params.id);
-      return response.status(201).json(apartment);
-    } catch (e) {
+
+  // async show({params, response}){
+  //   const task = await Task.find(params.id);
+  //   return response.json(task);
+  // }
+  async show ({ params, response }) {
+    const apartment = await Apartments.find(params.id);
+    if(apartment){
+      return response.json(apartment);
+    } else {
       return response.status(401).json({
         error : true,
-        message : 'Apartamento não cadastrado!'
+        message : "Apartamento não encontrado!"
       });
     }
   }
 
-  /**
-   * Render a form to update an existing apartment.
-   * GET apartments/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
-  }
 
   /**
    * Update apartment details.
@@ -118,4 +116,4 @@ class ApartmentController {
   }
 }
 
-module.exports = ApartmentController
+module.exports = ApartmentController;
