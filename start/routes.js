@@ -23,4 +23,5 @@ Route.group(()=>{
   Route.resource('task', 'TaskController');
   Route.resource('apartamentos', 'Ambient//ApartmentController');
   Route.resource('controle-de-acesso', 'Ambient//AccessControlController');
+  Route.resource('cameras', 'Ambient//CameraController');
 }).prefix('api');
