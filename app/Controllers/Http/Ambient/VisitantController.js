@@ -17,28 +17,16 @@ class VisitantController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index ({ request, response, auth }) {
     //Substituir por auth.client_id
-    let vehicle = await DB.table('vehicles').where('dweller_id', '1');
-    if(!vehicle){
+    let visitant = await DB.table('visitants').where('dweller_id', '1');
+    if(!visitant){
       return response.status(401).json({
         error : true,
-        message : 'Sem Veiculos cadastrados!'
+        message : 'Sem Visitantes cadastrados!'
       });
     }
-    return response.status(201).json(vehicle);
-  }
-
-  /**
-   * Render a form to be used for creating a new visitant.
-   * GET visitants/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
+    return response.status(201).json(visitant);
   }
 
   /**
@@ -50,6 +38,21 @@ class VisitantController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const data = request.only([
+      'nome',
+      'telefone',
+      'apartment_id',
+      'client_id',
+      'motorizado'
+    ]);
+    const visitant = new Visitant();
+    visitant.nome = data.nome;
+    visitant.telefone = data.telefone;
+    visitant.apartment_id = data.apartment_id;
+    visitant.client_id = data.client_id;
+    visitant.motorizado = data.motorizado;
+    await visitant.save();
+    return response.status(201).json({success : true, message: 'Visitante adicionado com Sucesso!'});
   }
 
   /**
@@ -59,21 +62,17 @@ class VisitantController {
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
-   * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
-  }
-
-  /**
-   * Render a form to update an existing visitant.
-   * GET visitants/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
+  async show ({ params, request, response }) {
+    const visitant = await Visitant.find(params.id);
+    if(visitant){
+      return response.json(visitant);
+    } else {
+      return response.status(401).json({
+        error : true,
+        message : "Visitante não cadastrado!"
+      });
+    }
   }
 
   /**
@@ -85,6 +84,26 @@ class VisitantController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const data = request.only([
+      'nome',
+      'telefone',
+      'apartment_id',
+      'client_id',
+      'motorizado'
+    ]);
+    const visitant = await Visitant.find(params.id);
+    if(visitant) {
+      return response.status(401).json({
+        message : 'Visitante não encontrado!'
+      });
+    }
+    visitant.nome = data.nome;
+    visitant.telefone = data.telefone;
+    visitant.apartment_id = data.apartment_id;
+    visitant.client_id = data.client_id;
+    visitant.motorizado = data.motorizado;
+    await visitant.save();
+    return response.status(201).json({success : true, message: 'Visitante Atualizado com Sucesso!'});
   }
 
   /**
@@ -96,7 +115,17 @@ class VisitantController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    const visitant = await Visitant.find(params.id);
+    if(!visitant) {
+      return response.status(401).json({
+        message : "Erro! não encontrado!"
+      });
+    }
+    await visitant.delete();
+    return response.status(200).json({
+      message : "Removido com sucesso!"
+    });
   }
 }
 
-module.exports = VisitantController
+module.exports = VisitantController;
