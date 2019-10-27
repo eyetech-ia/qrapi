@@ -25,4 +25,5 @@ Route.group(()=>{
   Route.resource('cameras', 'Ambient//CameraController');
   Route.resource('moradores', 'Ambient//DwellerController');
   Route.resource('veiculos', 'Ambient//VehiclesController');
+  Route.resource('visitantes', 'Ambient//VisitantsController');
 }).prefix('api');
