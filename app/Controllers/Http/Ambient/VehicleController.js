@@ -40,18 +40,20 @@ class VehicleController {
    */
   async store ({ request, response }) {
     const data = request.only([
-      'nome',
-      'telefone',
+      'placa',
       'apartment_id',
+      'cor',
+      'modelo',
       'status'
     ]);
-    const dweller = new Dweller();
-    dweller.nome = data.nome;
-    dweller.telefone = data.telefone;
-    dweller.apartment_id = data.apartment_id;
-    dweller.status = data.status;
-    await dweller.save();
-    return response.status(201).json({success : true, message: 'Morador adicionado com Sucesso!'});
+    const vehicle = new Vehicle();
+    vehicle.placa = data.placa;
+    vehicle.apartament_id = data.apartment_id;
+    vehicle.cor = data.cor;
+    vehicle.modelo = data.modelo;
+    vehicle.status = data.status;
+    await vehicle.save();
+    return response.status(201).json({success : true, message: 'Veículo adicionado com Sucesso!'});
   }
 
   /**
@@ -64,13 +66,13 @@ class VehicleController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
-    const dweller = await Dweller.find(params.id);
-    if(dweller){
-      return response.json(dweller);
+    const vehicle = await Vehicle.find(params.id);
+    if(vehicle){
+      return response.json(vehicle);
     } else {
       return response.status(401).json({
         error : true,
-        message : "Morador não cadastrado!"
+        message : "Veículo não cadastrado!"
       });
     }
   }
@@ -86,23 +88,25 @@ class VehicleController {
    */
   async update ({ params, request, response }) {
     const data = request.only([
-      'nome',
-      'telefone',
+      'placa',
       'apartment_id',
+      'cor',
+      'modelo',
       'status'
     ]);
-    const dweller = await Dweller.find(params.id);
-    if(!dweller) {
+    const vehicle = await Vehicle.find(params.id);
+    if(vehicle) {
       return response.status(401).json({
         message : 'Morador não encontrado!'
       });
     }
-    dweller.nome = data.nome;
-    dweller.telefone = data.telefone;
-    dweller.apartment_id = data.apartment_id;
-    dweller.status = data.status;
-    await dweller.save();
-    return response.status(201).json({success : true, message: 'Morador Atualizado com Sucesso!'});
+    vehicle.placa = data.placa;
+    vehicle.apartament_id = data.apartment_id;
+    vehicle.cor = data.cor;
+    vehicle.modelo = data.modelo;
+    vehicle.status = data.status;
+    await vehicle.save();
+    return response.status(201).json({success : true, message: 'Veículo Atualizado com Sucesso!'});
   }
 
   /**
@@ -115,16 +119,16 @@ class VehicleController {
    */
   async destroy ({ params, request, response }) {
     const vehicle = await Vehicle.find(params.id);
-    if(!dweller) {
+    if(!vehicle) {
       return response.status(401).json({
         message : "Erro! não encontrado!"
       });
     }
-    await dweller.delete();
+    await vehicle.delete();
     return response.status(200).json({
       message : "Removido com sucesso!"
     });
   }
 }
 
-module.exports = VehicleController
+module.exports = VehicleController;
