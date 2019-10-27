@@ -7,18 +7,18 @@ class ClientsSchema extends Schema {
   up () {
     this.create('clients', (table) => {
       table.increments();
-      table.string('nomeFantasia').notNullable();
-      table.string('razaoSocial').notNullable();
-      table.string('cnpj').notNullable;
-      table.string('cep').notNullable;
-      table.string('rua').notNullable;
-      table.string('bairro').notNullable;
-      table.string('cidade').notNullable;
-      table.string('uf').notNullable;
-      table.string('numero').notNullable;
-      table.string('telefone').notNullable;
-      table.string('emailContato').notNullable;
-      table.string('emailFinanceiro').notNullable;
+      table.string('nomeFantasia').nullable();
+      table.string('razaoSocial').nullable();
+      table.string('cnpj').nullable();
+      table.string('cep').nullable();
+      table.string('rua').nullable();
+      table.string('bairro').nullable();
+      table.string('cidade').nullable();
+      table.string('uf').nullable();
+      table.string('numero').nullable();
+      table.string('telefone').nullable();
+      table.string('emailContato').nullable();
+      table.string('emailFinanceiro').nullable();
       table.timestamps()
     })
   }
@@ -28,4 +28,4 @@ class ClientsSchema extends Schema {
   }
 }
 
-module.exports = ClientsSchema
+module.exports = ClientsSchema;

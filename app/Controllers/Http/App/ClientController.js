@@ -1,5 +1,6 @@
-'use strict'
-
+'use strict';
+const Client = use('App/Models/App/Client');
+const DB = use('Database');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -15,21 +16,17 @@ class ClientController {
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
-   * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
-  }
-
-  /**
-   * Render a form to be used for creating a new client.
-   * GET clients/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
+  async index ({ request, response, auth }) {
+    //Substituir por auth.client_id
+    let dweller = await DB.table('apartments').where('client_id', '123456');
+    if(!dweller){
+      return response.status(401).json({
+        error : true,
+        message : 'Sem Moradores cadastrados!'
+      });
+    }
+    return response.status(201).json(dweller);
   }
 
   /**
@@ -41,6 +38,35 @@ class ClientController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const data = request.only([
+      'nomeFantasia',
+      'razaoSocial',
+      'cnpj',
+      'cep',
+      'rua',
+      'bairro',
+      'cidade',
+      'uf',
+      'numero',
+      'telefone',
+      'emailContato',
+      'emailFinanceiro'
+    ]);
+    const client = new Client();
+    client.nomeFantasia = data.nomeFantasia;
+    client.razaoSocial = data.razaoSocial;
+    client.cnpj = data.cnpj;
+    client.cep = data.cep;
+    client.rua = data.rua;
+    client.bairro = data.bairro;
+    client.cidade = data.cidade;
+    client.uf = data.uf;
+    client.numero = data.numero;
+    client.telefone = data.telefone;
+    client.emailContato = data.emailContato;
+    client.emailFinanceiro = data.emailFinanceiro;
+    await client.save();
+    return response.status(201).json({success : true, message: 'Cliente adicionado com Sucesso!'});
   }
 
   /**
@@ -50,22 +76,11 @@ class ClientController {
    * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
-   * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show ({ params, request, response }) {
+
   }
 
-  /**
-   * Render a form to update an existing client.
-   * GET clients/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
-  }
 
   /**
    * Update client details.
@@ -76,6 +91,40 @@ class ClientController {
    * @param {Response} ctx.response
    */
   async update ({ params, request, response }) {
+    const data = request.only([
+      'nomeFantasia',
+      'razaoSocial',
+      'cnpj',
+      'cep',
+      'rua',
+      'bairro',
+      'cidade',
+      'uf',
+      'numero',
+      'telefone',
+      'emailContato',
+      'emailFinanceiro'
+    ]);
+
+    const client = await Client.find(params.id);
+    if(!client) {
+      return response.status(401).json({
+        message : 'Morador não encontrado!'
+      });
+    }
+    client.nomeFantasia = data.nomeFantasia;
+    client.razaoSocial = data.razaoSocial;
+    client.cnpj = data.cnpj;
+    client.cep = data.cep;
+    client.rua = data.rua;
+    client.bairro = data.bairro;
+    client.cidade = data.cidade;
+    client.uf = data.uf;
+    client.numero = data.numero;
+    client.telefone = data.telefone;
+    client.emailContato = data.emailContato;
+    client.emailFinanceiro = data.emailFinanceiro;
+    return response.status(201).json({success : true, message: 'Cliente Atualizado com Sucesso!'});
   }
 
   /**
@@ -90,4 +139,4 @@ class ClientController {
   }
 }
 
-module.exports = ClientController
+module.exports = ClientController;
