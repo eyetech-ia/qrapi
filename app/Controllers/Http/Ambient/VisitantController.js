@@ -1,5 +1,5 @@
-'use strict'
-
+'use strict';
+const Visitant = use('App/Models/Ambient/Visitant');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -18,6 +18,15 @@ class VisitantController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    //Substituir por auth.client_id
+    let vehicle = await DB.table('vehicles').where('dweller_id', '1');
+    if(!vehicle){
+      return response.status(401).json({
+        error : true,
+        message : 'Sem Veiculos cadastrados!'
+      });
+    }
+    return response.status(201).json(vehicle);
   }
 
   /**
