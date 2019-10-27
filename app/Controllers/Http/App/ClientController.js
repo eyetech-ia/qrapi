@@ -19,14 +19,14 @@ class ClientController {
    */
   async index ({ request, response, auth }) {
     //Substituir por auth.client_id
-    let dweller = await DB.table('apartments').where('client_id', '123456');
-    if(!dweller){
+    let client = await DB.table('clients').where('id', '123456');
+    if(!client){
       return response.status(401).json({
         error : true,
-        message : 'Sem Moradores cadastrados!'
+        message : 'Sem Clientes cadastrados!'
       });
     }
-    return response.status(201).json(dweller);
+    return response.status(201).json(client);
   }
 
   /**
@@ -78,7 +78,15 @@ class ClientController {
    * @param {Response} ctx.response
    */
   async show ({ params, request, response }) {
-
+    const client = await Client.find(params.id);
+    if(client){
+      return response.json(client);
+    } else {
+      return response.status(401).json({
+        error : true,
+        message : "Cliente não cadastrado!"
+      });
+    }
   }
 
 
@@ -109,7 +117,7 @@ class ClientController {
     const client = await Client.find(params.id);
     if(!client) {
       return response.status(401).json({
-        message : 'Morador não encontrado!'
+        message : 'Cliente não encontrado!'
       });
     }
     client.nomeFantasia = data.nomeFantasia;
@@ -136,6 +144,16 @@ class ClientController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
+    const client = await Client.find(params.id);
+    if(!client) {
+      return response.status(401).json({
+        message : "Erro! não encontrado!"
+      });
+    }
+    await client.delete();
+    return response.status(200).json({
+      message : "Removido com sucesso!"
+    });
   }
 }
 
