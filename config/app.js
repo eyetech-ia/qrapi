@@ -20,10 +20,10 @@ module.exports = {
 
   /*
   |--------------------------------------------------------------------------
-  | App Key
+  | Application Key
   |--------------------------------------------------------------------------
   |
-  | App key is a randomly generated 16 or 32 characters long string required
+  | Application key is a randomly generated 16 or 32 characters long string required
   | to encrypted cookies, sessions and other sensitive data.
   |
   */
@@ -201,7 +201,7 @@ module.exports = {
     */
     console: {
       driver: 'console',
-      name: 'adonis-app',
+      name: 'adonis-App',
       level: 'info'
     },
 
@@ -211,14 +211,14 @@ module.exports = {
     |--------------------------------------------------------------------------
     |
     | File transport uses file driver and writes log messages for a given
-    | file inside `tmp` directory for your app.
+    | file inside `tmp` directory for your App.
     |
     | For a different directory, set an absolute path for the filename.
     |
     */
     file: {
       driver: 'file',
-      name: 'adonis-app',
+      name: 'adonis-App',
       filename: 'adonis.log',
       level: 'info'
     }

@@ -26,4 +26,6 @@ Route.group(()=>{
   Route.resource('moradores', 'Ambient//DwellerController');
   Route.resource('veiculos', 'Ambient//VehiclesController');
   Route.resource('visitantes', 'Ambient//VisitantsController');
+  //Namespace Application
+  Route.resource('clientes', 'Application//ClientController');
 }).prefix('api');

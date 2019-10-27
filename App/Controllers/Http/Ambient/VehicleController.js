@@ -1,5 +1,5 @@
 'use strict';
-const Vehicle = use('App/Models/Ambient/Vehicle');
+const Vehicle = use('Application/Models/Ambient/Vehicle');
 const DB = use('Database');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */

@@ -1,5 +1,5 @@
 'use strict';
-const Registros = use ('App/Models/Ambient/AccessControl');
+const Registros = use ('Application/Models/Ambient/AccessControl');
 const DB = use('Database');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
