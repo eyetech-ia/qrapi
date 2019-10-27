@@ -7,13 +7,13 @@ class ApartmentsSchema extends Schema {
   up () {
     this.create('apartments', (table) => {
       table.increments();
-      table.integer('numero').nullable();
-      table.string('bloco').nullable();
-      table.string('telefone').nullable();
-      table.string('veiculos').nullable();
-      table.string('moradores').nullable();
-      table.string('client_id').nullable();
-      table.string('condominium_id').nullable();
+      table.integer('numero').notNullable();
+      table.string('bloco').notNullable();
+      table.string('telefone').notNullable();
+      table.string('veiculos').notNullable();
+      table.string('moradores').notNullable();
+      table.string('client_id').notNullable();
+      table.string('condominium_id').notNullable();
       table.timestamps();
     })
   }

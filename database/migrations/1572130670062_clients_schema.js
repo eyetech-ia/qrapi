@@ -7,18 +7,18 @@ class ClientsSchema extends Schema {
   up () {
     this.create('clients', (table) => {
       table.increments();
-      table.string('nomeFantasia').nullable();
-      table.string('razaoSocial').nullable();
-      table.string('cnpj');
-      table.string('cep');
-      table.string('rua');
-      table.string('bairro');
-      table.string('cidade');
-      table.string('uf');
-      table.string('numero');
-      table.string('telefone');
-      table.string('emailContato');
-      table.string('emailFinanceiro');
+      table.string('nomeFantasia').notNullable();
+      table.string('razaoSocial').notNullable();
+      table.string('cnpj').notNullable;
+      table.string('cep').notNullable;
+      table.string('rua').notNullable;
+      table.string('bairro').notNullable;
+      table.string('cidade').notNullable;
+      table.string('uf').notNullable;
+      table.string('numero').notNullable;
+      table.string('telefone').notNullable;
+      table.string('emailContato').notNullable;
+      table.string('emailFinanceiro').notNullable;
       table.timestamps()
     })
   }
