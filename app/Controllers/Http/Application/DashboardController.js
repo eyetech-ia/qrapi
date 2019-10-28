@@ -20,9 +20,9 @@ class DashboardController {
    */
   async index ({ request, response, view }) {
     //Substituir por auth.client_id
-    let vehicles = await DB.table('vehicles').where('id', 1).count();
-    let visitants = await DB.table('visitants').where('id', 1).count();
-    let cameras = await DB.table('cameras').where('id', 1).count();
+    let vehicles = await DB.table('vehicles').where('client_id', 1).count();
+    let visitants = await DB.table('visitants').where('client_id', 1).count();
+    let cameras = await DB.table('cameras').where('client_id', 1).count();
     return response.status(201).json({
       vehicles : vehicles,
       visitants : visitants,
