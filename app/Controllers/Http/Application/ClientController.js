@@ -1,5 +1,5 @@
 'use strict';
-const Client = use('App/Models/App/Client');
+const Client = use('App/Models/Application/Client');
 const DB = use('Database');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */

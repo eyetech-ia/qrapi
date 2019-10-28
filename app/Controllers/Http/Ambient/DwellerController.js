@@ -1,5 +1,5 @@
 'use strict';
-const Dweller = use('Application/Models/Ambient/Dweller');
+const Dweller = use('App/Models/Ambient/Dweller');
 const DB = use('Database');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */

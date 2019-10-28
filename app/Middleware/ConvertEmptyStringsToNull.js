@@ -14,4 +14,4 @@ class ConvertEmptyStringsToNull {
   }
 }
 
-module.exports = ConvertEmptyStringsToNull
+module.exports = ConvertEmptyStringsToNull;

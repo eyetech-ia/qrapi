@@ -1,5 +1,5 @@
 'use strict';
-const Visitant = use('Application/Models/Ambient/Visitant');
+const Visitant = use('App/Models/Ambient/Visitant');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */

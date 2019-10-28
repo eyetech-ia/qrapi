@@ -1,7 +1,7 @@
 'use strict';
 
 const DB  = use('Database');
-const Cameras = use('Application/Models/Ambient/Camera');
+const Cameras = use('App/Models/Ambient/Camera');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
