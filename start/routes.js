@@ -1,5 +1,5 @@
 'use strict';
-
+const env = use('Env');
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -16,7 +16,11 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
 
-Route.on('/').render('welcome');
+Route.get('/', () => {
+  return {
+    message: 'Welcome to EyeTech IA Api, access the application in host:' + env.get('APP_URL')
+  }
+});
 
 
 Route.group(()=>{
