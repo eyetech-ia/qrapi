@@ -3,19 +3,11 @@
 /** @type {import('@adonisjs/lucid/src/Schema')} */
 const Schema = use('Schema');
 
-class VisitantsSchema extends Schema {
+class PerfilSchema extends Schema {
   up () {
-    this.create('visitants', (table) => {
+    this.create('perfil', (table) => {
       table.increments();
       table.string('nome').notNullable();
-      table.string('telefone').notNullable();
-      table
-        .integer('apartment_id')
-        .unsigned()
-        .references('id')
-        .inTable('apartments')
-        .onUpdate('CASCADE')
-        .onDelete('CASCADE');
       table
         .integer('client_id')
         .unsigned()
@@ -24,20 +16,27 @@ class VisitantsSchema extends Schema {
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
       table
-        .integer('vehicle_id')
+        .integer('level_id')
         .unsigned()
         .references('id')
-        .inTable('vehicles')
+        .inTable('levels')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
-      table.boolean('motorizado').notNullable();
+      table
+        .integer('menu_id')
+        .unsigned()
+        .references('id')
+        .inTable('menus')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
+      table.boolean('status').notNullable();
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('visitants')
+    this.drop('perfil')
   }
 }
 
-module.exports = VisitantsSchema;
+module.exports = PerfilSchema;

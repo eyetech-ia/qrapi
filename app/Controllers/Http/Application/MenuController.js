@@ -1,5 +1,6 @@
 'use strict';
-
+const Menu = use('App/Models/App/Menu');
+const DB = use('Database');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -18,6 +19,8 @@ class MenuController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
+    let menus  = DB.table('menus').where('status', 1)
+
   }
 
   /**

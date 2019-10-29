@@ -1,6 +1,7 @@
 'use strict';
 const Apartments = use('App/Models/Ambient/Apartment');
 const DB = use('Database');
+const Validator = use('Validator');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -20,14 +21,14 @@ class ApartmentController {
    */
   async index ({ response, auth }) {
     //Substituir por auth.client_id
-    let apartments = await DB.table('apartments').where('client_id', '123456');
+    const apartments = await DB.table('apartments').where('client_id', 1);
     if(!apartments){
-      return response.status(401).json({
+      return response.status(404).send({
         error : true,
         message : 'Sem dados Cadastrados para esse cliente!'
       });
     }
-    return response.status(201).json(apartments);
+    return apartments;
   }
   /**
    * Create/save a new apartment.
@@ -38,25 +39,29 @@ class ApartmentController {
    * @param {Response} ctx.response
    */
   async store ({ request, response, auth }) {
-    const data = request.only([
-      'numero',
-      'bloco',
-      'telefone',
-      'veiculos',
-      'moradores',
-      'client_id',
-      'condominium_id'
-    ]);
-    const apartment = new Apartments();
+    try{
+      let data  = request.only([
+        'numero',
+        'bloco',
+        'telefone',
+        'veiculos',
+        'moradores',
+        'client_id'
+      ]);
+      const apartment = new Apartments();
       apartment.numero = data.numero;
       apartment.bloco = data.bloco;
       apartment.telefone = data.telefone;
       apartment.moradores = data.moradores;
       apartment.veiculos = data.veiculos;
       apartment.client_id = data.client_id;
-      apartment.condominium_id = data.condominium_id;
-    await apartment.save();
-    return response.status(201).json({success : true, message: 'Cadastrado com Sucesso!'});
+      await apartment.save();
+      return response.status(201).send({success : true, message: 'Cadastrado com Sucesso!'});
+    }catch (e) {
+      return response.status(500).send({
+        error : `Erro: ${e.message}`
+      })
+    }
   }
   /**
    * Display a single apartment.
@@ -69,14 +74,12 @@ class ApartmentController {
    */
   async show ({ params, response }) {
     const apartment = await Apartments.find(params.id);
-    if(apartment){
-      return response.json(apartment);
-    } else {
-      return response.status(401).json({
-        error : true,
-        message : "Apartamento não encontrado!"
-      });
+    if(!apartment){
+      return response.status(404).send({
+        message : 'Nenhum registro localizado!'
+      })
     }
+    return apartment;
   }
 
   /**
@@ -128,12 +131,12 @@ class ApartmentController {
   async destroy ({ params, request, response }) {
     const apartment = await Apartments.find(params.id);
     if(!apartment) {
-      return response.status(401).json({
+      return response.status(401).send({
         message : "Erro! não encontrado!"
       });
     }
     await apartment.delete();
-    return response.status(200).json({
+    return response.status(200).send({
       message : "Removido com sucesso!"
     });
   }

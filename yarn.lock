@@ -99,6 +99,14 @@
     winston "^3.2.1"
     youch "^2.0.10"
 
+"@adonisjs/generic-exceptions@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@adonisjs/generic-exceptions/-/generic-exceptions-1.0.0.tgz#a78832cfb2c7f9abd27f0a1c35558efecc0d1c9c"
+  integrity sha512-Ll9uC1g6jg/P63A+8VkHdP8fUXIPqKxx38fW6W/ZfYawMkreQklQX19Kz3XodwDg32Leqv5DXUZ3JN4JG89vig==
+  dependencies:
+    node-exceptions "^2.0.2"
+    upcast "^1.0.4"
+
 "@adonisjs/generic-exceptions@^2.0.0", "@adonisjs/generic-exceptions@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@adonisjs/generic-exceptions/-/generic-exceptions-2.0.1.tgz#793e33c4acf01f5e98e68535f2a7987a23bda0e3"
@@ -200,6 +208,14 @@ acorn@^7.0.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.1.0.tgz#949d36f2c292535da602283586c2477c57eb2d6c"
   integrity sha512-kL5CuoXA/dgxlBbVrflsflzQ3PAas7RYZB52NOm/6839iVYJgKMJ3cQJD+t2i5+qFa8h3MDpEOJiS64E8JLnSQ==
+
+adonis-validator@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/adonis-validator/-/adonis-validator-1.0.2.tgz#ae5c92a9661b495bf2c97076d6d55ae915080fc8"
+  integrity sha512-2gy4cuKHnbXsjVavbEHZMmIRcu3Rfc7NBD3Uv18t/vv4dlX1EveWs2invoP5swPtvXiG5GoQP5+TYTL/S7FIJA==
+  dependencies:
+    "@adonisjs/generic-exceptions" "^1.0.0"
+    validatorjs "^3.13.5"
 
 ajv@^6.5.5:
   version "6.10.2"
@@ -946,6 +962,11 @@ dashdash@^1.12.0:
   integrity sha1-hTz6D3y+L+1d4gMmuN1YEDX24vA=
   dependencies:
     assert-plus "^1.0.0"
+
+date-fns@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.1.tgz#c5f30e31d3294918e6b6a82753a4e719120e203d"
+  integrity sha512-C14oTzTZy8DH1Eq8N78owrCWvf3+cnJw88BTK/N3DYWVxDJuJzPaNdplzYxDYuuXXGvqBcO4Vy5SOrwAooXSWw==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.6, debug@^2.6.8:
   version "2.6.9"
@@ -2244,7 +2265,7 @@ node-csp@^1.0.1:
   dependencies:
     platform "^1.3.1"
 
-node-exceptions@^2.0.1:
+node-exceptions@^2.0.1, node-exceptions@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/node-exceptions/-/node-exceptions-2.0.2.tgz#2612b45929b774e3669557f852b47507765acfe7"
   integrity sha512-nILccFLvnaOBoKZZtWfZipn/hlThZOT6UJOLX6SA3yLMYPcvLTIF26PXx73sPnAg45p05iYFYw2jvayNHz4rDA==
@@ -3512,6 +3533,11 @@ unset-value@^1.0.0:
     has-value "^0.3.1"
     isobject "^3.0.0"
 
+upcast@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/upcast/-/upcast-1.0.4.tgz#ddf8b4c267b6ea3f3537e77e1c6594b2fd1ea40f"
+  integrity sha1-3fi0wme26j81N+d+HGWUsv0epA8=
+
 upcast@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/upcast/-/upcast-2.1.2.tgz#69468e374b3cfb7b22fb632d55a420048b9e24a1"
@@ -3560,6 +3586,13 @@ v8flags@^3.1.1:
   integrity sha512-amh9CCg3ZxkzQ48Mhcb8iX7xpAfYJgePHxWMQCBWECpOSqJUXgY26ncA61UTV0BkPqfhcy6mzwCIoP4ygxpW8w==
   dependencies:
     homedir-polyfill "^1.0.1"
+
+validatorjs@^3.13.5:
+  version "3.17.1"
+  resolved "https://registry.yarnpkg.com/validatorjs/-/validatorjs-3.17.1.tgz#164308585eafbcd78d3eb56bb5b0493237aa602b"
+  integrity sha512-i/aOdu1FPW48Y2NRt/BmHxcpoKcl7vvGtxUkPoacUVNU8jtPlb68QYcYqt7Fls9wqO5YpfLEoUHCrpk3pkIqsQ==
+  dependencies:
+    date-fns "2.0.1"
 
 vary@^1.1.2:
   version "1.1.2"

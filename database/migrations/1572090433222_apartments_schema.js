@@ -12,7 +12,6 @@ class ApartmentsSchema extends Schema {
       table.string('telefone').notNullable();
       table.string('veiculos').notNullable();
       table.string('moradores').notNullable();
-      table.string('client_id').notNullable();
       table
         .integer('client_id')
         .unsigned()
