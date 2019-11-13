@@ -126,4 +126,4 @@ class DwellerController {
   }
 }
 
-module.exports = DwellerController;
+module.exports = DwellerController
