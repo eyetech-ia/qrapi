@@ -15,15 +15,19 @@ const env = use('Env');
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
+const Env = use('Env');
 
-Route.get('/', () => {
-  return {
-    message: 'Welcome to EyeTech IA Api, access the application in host:' + env.get('APP_URL')
-  }
+Route.get('/', ({ response }) => {
+  return response.redirect('/api')
 });
 
 
 Route.group(()=>{
+  Route.get('/', () => {
+    return {
+      success: `Server running on ${Env.get('HOST')} in port: ${Env.get('PORT')}`
+    }
+  });
   Route.resource('apartamentos', 'Ambient//ApartmentController');
   Route.resource('controle-de-acesso', 'Ambient//AccessControlController');
   Route.resource('cameras', 'Ambient//CameraController');
