@@ -10,7 +10,6 @@ const base64ToImage = require('base64-to-image');
 const path = require('path');
 const codePath = use('Helpers');
 const Event = use('Event');
-console.log(codePath);
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
