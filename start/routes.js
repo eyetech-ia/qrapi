@@ -16,12 +16,11 @@ const env = use('Env');
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route');
 const Env = use('Env');
+const Event = use('Event');
 
 Route.get('/', ({ response }) => {
   return response.redirect('/api')
 });
-
-
 Route.group(()=>{
   Route.get('/', () => {
     return {
@@ -33,7 +32,7 @@ Route.group(()=>{
   Route.resource('cameras', 'Ambient//CameraController');
   Route.resource('moradores', 'Ambient//DwellerController');
   Route.resource('veiculos', 'Ambient//VehiclesController');
-  Route.resource('visitantes', 'Ambient//VisitantsController');
+  Route.resource('visitantes', 'Ambient//VisitantController');
   //Namespace Application
   Route.resource('clientes', 'Application//ClientController');
   Route.resource('dashboard', 'Application//DashboardController');

@@ -30,7 +30,11 @@ class VisitantsSchema extends Schema {
         .inTable('vehicles')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
-      table.boolean('motorizado').notNullable();
+      table.date('visit_date').nullable();
+      table.date('visit_expires').nullable();
+      table.boolean('motorized').notNullable();
+      table.string('access_token').notNullable();
+      table.boolean('active').default(false);
       table.timestamps()
     })
   }
