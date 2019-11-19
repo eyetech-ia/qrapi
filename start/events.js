@@ -17,7 +17,6 @@ Event.on('new::visitant', async (visitant) => {
     from : 'noreply@eyetech.digital',
     subject : 'Confirmação da Visita',
     html : '<strong>Olá '+ visitant.nome +', click no link para confirmar a visita!</strong> ' +
-      '<a href="https://app.eyetech.com.br/validate/token/'+visitant.access_token+'">Confirmar Visita</a>'
+      '<a href="https://localhost:5000/visitantes/validate/'+ visitant.access_token +'/entrance">Confirmar Visita</a>'
   });
-
 });

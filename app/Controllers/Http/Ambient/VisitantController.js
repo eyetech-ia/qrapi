@@ -117,6 +117,19 @@ class VisitantController {
       });
     }
   }
+  async ValidateToken({ params, request, response }) {
+    const visitantToken = await Visitant.findBy('access_token', params.token);
+    if(visitantToken){
+      visitantToken.active = true;
+      await visitantToken.save();
+      return 'Visita Confirmada!'
+    } else {
+      return response.status(401).json({
+        error : true,
+        message : "Dados Inválidos!"
+      });
+    }
+  }
 
   /**
    * Display a single visitant.
