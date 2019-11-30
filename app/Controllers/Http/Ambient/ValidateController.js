@@ -1,5 +1,6 @@
-'use strict'
-
+'use strict';
+const DB = use('Database');
+const Visitant = use('App/Models/Ambient/Visitant');
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -17,7 +18,11 @@ class ValidateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index ({ request, response, view, params }) {
+    const token = params.token;
+    return view.render('emails.welcome', {
+      token : token
+    });
   }
 
   /**
@@ -29,7 +34,8 @@ class ValidateController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async create ({ request, response, view }) {
+  async create ({ request, response, params }) {
+
   }
 
   /**
@@ -40,7 +46,20 @@ class ValidateController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, response, params }) {
+      const tk = request.all();
+      const visitantToken = await Visitant.findBy('access_token', tk.token);
+      console.log(visitantToken);
+      if(visitantToken){
+        visitantToken.active = true;
+        await visitantToken.save();
+        return 'Visita Confirmada!'
+      } else {
+        return response.status(401).json({
+          error : true,
+          message : "Opa, Visita não encontrada!"
+        });
+    }
   }
 
   /**

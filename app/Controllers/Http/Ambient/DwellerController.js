@@ -45,12 +45,7 @@ class DwellerController {
       'apartment_id',
       'status'
     ]);
-    const dweller = new Dweller();
-    dweller.nome = data.nome;
-    dweller.telefone = data.telefone;
-    dweller.apartment_id = data.apartment_id;
-    dweller.status = data.status;
-    await dweller.save();
+    await Dweller.save(data);
     return response.status(201).json({success : true, message: 'Morador adicionado com Sucesso!'});
   }
 

@@ -36,6 +36,6 @@ Route.group(()=>{
   //Namespace Application
   Route.resource('clientes', 'Application//ClientController');
   Route.resource('dashboard', 'Application//DashboardController');
-  Route.post('visitantes/validate/:token/entrance', 'Ambient//VisitantController.ValidateToken');
-  Route.get('visitantes/validate', 'Ambient//ValidateCOntroller');
+  Route.post('visitante/validate', 'Ambient//ValidateController.store');
+  Route.get('visitante/validate/:token', 'Ambient//ValidateController.index');
 }).prefix('api');

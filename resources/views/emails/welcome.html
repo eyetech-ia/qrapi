@@ -12,3 +12,11 @@
   height: 200px !important;
 }
 </style>
+
+
+  <form action="/visitante/validate/isvalid" method="post">
+  {{csrf_field()}}
+
+  <input type="hidden" name="token" value="{{token}}">
+  <button type="submit">Confirmar</button>
+</form>

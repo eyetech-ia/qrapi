@@ -92,20 +92,18 @@ class VisitantController {
         await Visitant.create(data);
 
         Event.fire('new::visitant', data);
-        // SendMail.setApiKey(ENV.get('SENDGRID_KEY'));
-        // await SendMail.send({
-        //   to : 'mesquitadev@gmail.com',
-        //   from : 'noreply@eyetech.digital',
-        //   subject : 'Confirmação da Visita',
-        //   html : view.render('emails.welcome', {
-        //     name : data.nome,
-        //     token : user_token,
-        //     date: data.visit_date,
-        //     expires : data.visit_expires
-        //   })
-        // });
-
-
+          // SendMail.setApiKey(ENV.get('SENDGRID_KEY'));
+          // await SendMail.send({
+          //   to : 'mesquitadev@gmail.com',
+          //   from : 'noreply@eyetech.digital',
+          //   subject : 'Confirmação da Visita',
+          //   html : view.render('emails.welcome', {
+          //     name : data.nome,
+          //     token : user_token,
+          //     date: data.visit_date,
+          //     expires : data.visit_expires
+          //   })
+          // });
         return response.status(201).json({
           success : true, message: 'Visitante adicionado com Sucesso!'
         });

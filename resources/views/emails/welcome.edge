@@ -3,7 +3,15 @@
   Dados confirmados da visita.
   Data : {{date}}
   Saída : {{expires}}
+  Token : {{token}}
 </p>
+<form action="/api/visitante/validate" method="post">
+  {{csrf}}
+
+  <input type="hidden" name="token" value="{{token}}">
+  <button type="submit">Confirmar</button>
+</form>
+
 <img class="code" src="7bt06jl29yru2gh1kb488z6uqk82w0r7.png" width="300" height="300">
 
 <style>
